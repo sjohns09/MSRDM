@@ -59,6 +59,10 @@ Backlog: https://github.com/sjohns09/MSRDM/projects/1
 Worklog: https://docs.google.com/a/terpmail.umd.edu/spreadsheets/d/1ZThi5BMmKaSMvxs0Rrzsw18x1GJcbB0TY2FZOLDv7rU/edit?usp=sharing
 	- Commentable by all UMD users
 
+## References
+
+Used the following tutorial video for guidance in the development of the Artificial Neural Network - https://vimeo.com/19569529
+
 ## License
 
 TBD
