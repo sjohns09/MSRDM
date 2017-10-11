@@ -56,8 +56,9 @@ Run program: ./app/shell-app
 
 Backlog: https://github.com/sjohns09/MSRDM/projects/1
 	- When each of the cards is clicked a more detailed view of that issue will open
+	- Each issue is tied to a milestone, which represents a Sprint
 Worklog: https://docs.google.com/a/terpmail.umd.edu/spreadsheets/d/1ZThi5BMmKaSMvxs0Rrzsw18x1GJcbB0TY2FZOLDv7rU/edit?usp=sharing
-	- Commentable by all UMD users
+	- Commentable by all UMD users with link
 
 ## References
 
