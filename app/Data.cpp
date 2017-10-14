@@ -5,9 +5,11 @@
  *      Author: sammie
  */
 #include <iostream>
+#include <vector>
+#include <string>
 #include "Data.h"
 
-Data::Data(std::string inFile, std::string outFile) {
+Data::Data(std::string file) {
   // TODO Auto-generated constructor stub
 
 }
