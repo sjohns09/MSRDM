@@ -19,9 +19,10 @@ class Neuron {
   Neuron(int numOutConnections, int index);
   void setOutValue (double value);
   double getOutValue ();
-  void feed_forward (NetLayer preLayer);
+  void feed_forward (const NetLayer& preLayer);
   void get_out_gradients (double targetVal);
-  void get_hidden_gradients (NetLayer nextLayer);
+  void get_hidden_gradients (const NetLayer& nextLayer);
+  void update_input_weights (NetLayer& preLayer);
 
   virtual ~Neuron();
 
@@ -39,7 +40,6 @@ private:
 //  std::vector<double> deltaWeights;
   double gradient;
   int nIndex;
-
 };
 
 #endif /* APP_NEURON_H_ */

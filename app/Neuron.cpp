@@ -7,8 +7,10 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include "NetLayer.h"
 #include "Neuron.h"
+
+double eta = 0.15;
+double alpha = 0.5;
 
 Neuron::Neuron(int numOutConnections, int index) {
 
@@ -18,6 +20,7 @@ Neuron::Neuron(int numOutConnections, int index) {
     outWeights.back().weight = initial_weight();
   }
   nIndex = index;
+
   std::cout << numOutConnections << std::endl;
 }
 
@@ -33,7 +36,7 @@ double Neuron::getOutValue() {
   return outValue;
 }
 
-void Neuron::feed_forward(NetLayer preLayer) {
+void Neuron::feed_forward(const NetLayer& preLayer) {
   double sum = 0.0;
   for (auto neuron : preLayer) {
     sum += neuron.getOutValue()*neuron.outWeights[nIndex].weight;
@@ -47,7 +50,35 @@ double Neuron::transferFunc(double x) {
 }
 
 double Neuron::transferFuncDX(double x) {
-  return 1-(pow(tanh(x),2)); // or 1.0 - x*x
+  return 1.0 - x*x; //1-(pow(tanh(x),2)) // or 1.0 - x*x
+}
+
+void Neuron::get_out_gradients(double targetVal) {
+  double delta = targetVal - outValue;
+  gradient = delta * transferFuncDX(outValue);
+}
+
+void Neuron::get_hidden_gradients(const NetLayer& nextLayer) {
+  double sum = 0.0;
+  for (int n = 0; n < nextLayer.size()-1; n++) {
+    sum += outWeights[n].weight * nextLayer[n].gradient;
+  }
+  gradient = sum * transferFuncDX(outValue);
+}
+
+void Neuron::update_input_weights(NetLayer& preLayer) {
+  for (int n = 0; n < preLayer.size(); n++) {
+    Neuron& preNeuron = preLayer[n];
+    double oldDWeight = preNeuron.outWeights[nIndex].deltaWeight;
+    //std::cout << "OldWeight = " << oldDWeight << std::endl;
+
+    double newDWeight = eta * preNeuron.getOutValue() * gradient
+        + alpha * oldDWeight;
+    //std::cout << "NewWeight = " << newDWeight << std::endl;
+
+    preNeuron.outWeights[nIndex].deltaWeight = newDWeight;
+    preNeuron.outWeights[nIndex].weight += newDWeight;
+  }
 }
 
 Neuron::~Neuron() {

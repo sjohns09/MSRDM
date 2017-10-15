@@ -9,8 +9,14 @@
 #include <string>
 #include "Data.h"
 
-Data::Data(std::string file) {
-  // TODO Auto-generated constructor stub
+Data::Data(std::string folderPath) {
+  dataFolder = folderPath;
+  trainingFile = dataFolder + "/TrainingData";
+  weightsFile = dataFolder + "/WeightsData";
+
+}
+
+void Data::create_new_training_set() {
 
 }
 
