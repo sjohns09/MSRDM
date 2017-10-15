@@ -6,14 +6,17 @@
  */
 #include <iostream>
 #include <vector>
-#include "NetLayer.h"
+//#include "NetLayer.h"
+#include "Network.h"
 
 #ifndef APP_NEURON_H_
 #define APP_NEURON_H_
 
+typedef std::vector<Neuron> NetLayer;
+
 class Neuron {
  public:
-  Neuron(double nextLayerNeurons);
+  Neuron(int numOutConnections, int index);
   void setOutValue (double value);
   double getOutValue ();
   void feed_forward (NetLayer preLayer);
@@ -23,15 +26,19 @@ class Neuron {
   virtual ~Neuron();
 
 private:
+  struct Connections {
+    double weight;
+    double deltaWeight;
+  };
+
   double initial_weight ();
-  double transferFunc (double x);
-  double transferFuncDX (double x);
+  static double transferFunc (double x);
+  static double transferFuncDX (double x);
   double outValue;
-  std::vector<double> outWeights;
-  std::vector<double> deltaWeights;
+  std::vector<Connections> outWeights;
+//  std::vector<double> deltaWeights;
   double gradient;
   int nIndex;
-
 
 };
 
