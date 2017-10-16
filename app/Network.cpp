@@ -16,6 +16,7 @@ using std::vector;
 using std::cout;
 using std::endl;
 
+
 Network::Network(int numInputs, int numOutputs, int numHiddenLayers, int numHiddenNeuron) {
   numLayers = numHiddenLayers + 2;  //Hidden Layers + In and Out Layer
   outputNum = numOutputs + 1; // includes bias neuron

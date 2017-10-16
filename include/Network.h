@@ -17,7 +17,9 @@ typedef std::vector<Neuron> NetLayer;
 
 class Network {
  public:
+  Network();
   Network(int numInputs,int numOutputs,int numHiddenLayers, int numHiddenNeuron);
+
 
   void feed_forward (const std::vector<double>& inputs);
   void back_prop (const std::vector<double>& targets);
