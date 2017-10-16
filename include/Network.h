@@ -6,7 +6,7 @@
  */
 #include <iostream>
 #include <vector>
-//#include "NetLayer.h"
+#include "Data.h"
 
 #ifndef NETWORK_H_
 #define NETWORK_H_
@@ -22,7 +22,8 @@ class Network {
   void feed_forward (const std::vector<double>& inputs);
   void back_prop (const std::vector<double>& targets);
   void get_output (std::vector<double>& results);
-  double getRecentAverageError() {return recentAverageError;}
+  double get_recent_error() {return recentAverageError;}
+  static void train(Network& net, std::vector<int> topology, Data& trainData);
 
   virtual ~Network();
 
