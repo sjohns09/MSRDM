@@ -23,8 +23,9 @@ Data::Data(string folderPath, int createNewData) {
 
   trainingDataFile.open(trainingFile.c_str());
   if (!trainingDataFile.is_open()) {
-    cout << "FILE DID NOT OPEN - Check that filepath exists" << std::endl;
+    cout << "FILE CHECK DID NOT PASS - Check that filepath exists" << std::endl;
   }
+  trainingDataFile.close();
 
   if (createNewData == 1) {
     create_new_training_set();
@@ -43,9 +44,12 @@ void Data::create_new_training_set() {
     trainingDataFile << "in: " << n1 << ".0 " << n2 << ".0 " << endl;
     trainingDataFile << "out: " << t << ".0" << endl;
   }
+  trainingDataFile.close();
 }
 
 vector<int> Data::read_topology() {
+
+  trainingDataFile.open(trainingFile.c_str());
 
   string line;
   string label;
@@ -63,6 +67,8 @@ vector<int> Data::read_topology() {
     sStream >> n;
     topology.push_back(n);
   }
+  trainingDataFile.close();
+
   return topology;
 }
 
@@ -70,18 +76,24 @@ vector<double> Data::get_next_inputs() {
 
   vector<double> nextInputs;
   string line;
-  getline(trainingDataFile, line);
-  stringstream sStream(line);
 
+  getline(trainingDataFile, line);
+  string c(1, line[0]);
+
+  if (c.compare("t") == 0) {
+    getline(trainingDataFile, line);
+  }
+
+  stringstream sStream(line);
   string label;
   sStream >> label;
+
   if (label.compare("in:") == 0) {
     double n;
     while (sStream >> n) {
       nextInputs.push_back(n);
     }
   }
-
   return nextInputs;
 }
 
@@ -100,7 +112,6 @@ vector<double> Data::get_target_outputs() {
       targetOutputVals.push_back(n);
     }
   }
-
   return targetOutputVals;
 }
 
@@ -116,7 +127,8 @@ void Data::show_vector_vals(string label, vector<double> v)
 
 bool Data::isEof()
 {
-  return trainingDataFile.eof();
+  bool isEof = trainingDataFile.eof();
+  return isEof;
 }
 
 Data::~Data() {

@@ -16,16 +16,12 @@
 
 class MSRDMLayer {
  public:
-  MSRDMLayer(int layerNum); // Creates a Network and Trains it
+  MSRDMLayer();
 
-  void train(std::string dataFile);
-  int get_MSRDM_output(std::vector<double> input);
+  void get_MSRDM_output(Network& net, std::vector<double> input);
   void learn(std::vector<double> removeCase);
+  void train(Network& myNet, std::vector<int> topology, Data& trainData);
   virtual ~MSRDMLayer();
-
- private:
-  //Network netMSRDM(2,1,1,4);
-
 
 };
 

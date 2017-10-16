@@ -7,47 +7,65 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
+#include <cassert>
 #include "Network.h"
-#include "MSRDMLayer.h"
+#include "Neuron.h"
 #include "Data.h"
+#include "MSRDMLayer.h"
+
 
 using std::vector;
+using std::cout;
+using std::endl;
 
-Network netMSRDM(2,1,1,4);
+MSRDMLayer::MSRDMLayer() {
 
-MSRDMLayer::MSRDMLayer(int layerNum) {
-  if (layerNum == 1) {
-    // Create Network
-    Data trainData(
-        "/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/Data/Layer1", 0);
-
-    vector<int> topology = trainData.read_topology();
-
-    // Topology: #inputs, #outputs, #hiddenLayers, #hiddenNeurons
-    netMSRDM(topology[0], topology[1], topology[2], topology[3]);
-    Network::train(netMSRDM, topology, trainData);
-  }
-  else if (layerNum == 0) {
-    // Create Network
-    Data trainData(
-        "/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/Data/Layer2", 0);
-
-    vector<int> topology = trainData.read_topology();
-
-    // Topology: #inputs, #outputs, #hiddenLayers, #hiddenNeurons
-    netMSRDM(topology[0], topology[1], topology[2], topology[3]);
-    Network::train(netMSRDM, topology, trainData);
-  }
 
 }
 
-int MSRDMLayer::get_MSRDM_output(std::vector<double> input) {
+void MSRDMLayer::get_MSRDM_output(Network& net, std::vector<double> input) {
   vector<double> resultVals;
-  netMSRDM.feed_forward(input);
-  netMSRDM.get_output(resultVals);
+  net.feed_forward(input);
+  net.get_output(resultVals);
   Data::show_vector_vals("Trained Output:", resultVals);
+}
 
-  return 0;
+void MSRDMLayer::train(Network& myNet, vector<int> topology, Data& trainData) {
+
+  trainData.trainingDataFile.open(trainData.trainingFile.c_str());
+
+  vector<double> inputVals, targetVals, resultVals;
+  int trainingPass = 0;
+  while (!trainData.isEof()) {
+    ++trainingPass;
+    cout << endl << "Pass" << trainingPass;
+
+    // Get new input data and feed it forward:
+    inputVals = trainData.get_next_inputs();
+    if (inputVals.size() != topology[0])
+      break;
+    Data::show_vector_vals(": Inputs :", inputVals);
+    myNet.feed_forward(inputVals);
+
+    // Collect the net's actual results:
+    myNet.get_output(resultVals);
+    Data::show_vector_vals("Outputs:", resultVals);
+
+    // Train the net what the outputs should have been:
+    targetVals = trainData.get_target_outputs();
+    Data::show_vector_vals("Targets:", targetVals);
+    assert(targetVals.size() == topology[1]);
+
+    myNet.back_prop(targetVals);
+
+    // Report how well the training is working, average over recent
+    cout << "Net recent average error: " << myNet.get_recent_error() << endl;
+  }
+
+  cout << endl << "Done Training" << endl;
+
+  trainData.trainingDataFile.close();
 }
 
 MSRDMLayer::~MSRDMLayer() {

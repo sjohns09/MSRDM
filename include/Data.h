@@ -23,13 +23,13 @@ class Data {
   void edit_training_data(std::string caseToRemove);
   static void show_vector_vals(std::string label, std::vector<double> v);
   bool isEof(void);
+  std::fstream trainingDataFile;
+  std::string trainingFile;
 
   virtual ~Data();
 
  private:
   std::string dataFolder;
-  std::string trainingFile;
-  std::fstream trainingDataFile;
   void create_new_training_set();
 };
 

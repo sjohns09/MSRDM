@@ -17,7 +17,6 @@ typedef std::vector<Neuron> NetLayer;
 
 class Network {
  public:
-  Network();
   Network(int numInputs,int numOutputs,int numHiddenLayers, int numHiddenNeuron);
 
 
@@ -25,7 +24,6 @@ class Network {
   void back_prop (const std::vector<double>& targets);
   void get_output (std::vector<double>& results);
   double get_recent_error() {return recentAverageError;}
-  static void train(Network& net, std::vector<int> topology, Data& trainData);
 
   virtual ~Network();
 
