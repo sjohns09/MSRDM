@@ -41,25 +41,25 @@ int main() {
   actionMSRDM.train(netAction, topology2, trainData2);
 
   // DEMO
-  cout << "Enter Input For Demo 1" << endl;  // Must press enter after each
-  string stringUserInput1;
-  string stringUserInput2;
-  vector<double> userInputs(2);
-  cin >> stringUserInput1 >> stringUserInput2;
-  userInputs[0] = std::stod(stringUserInput1);
-  userInputs[1] = std::stod(stringUserInput2);
-
-  stateMSRDM.get_MSRDM_output(netState, userInputs);
-
-  cout << "Enter Input For Demo 2" << endl;  // Must press enter after each
-  string stringUserInput3;
-  string stringUserInput4;
-  vector<double> userInputs2(2);
-  cin >> stringUserInput3 >> stringUserInput4;
-  userInputs2[0] = std::stod(stringUserInput3);
-  userInputs2[1] = std::stod(stringUserInput4);
-
-  actionMSRDM.get_MSRDM_output(netAction, userInputs2);
+//  cout << "Enter Input For Demo 1" << endl;  // Must press enter after each
+//  string stringUserInput1;
+//  string stringUserInput2;
+//  vector<double> userInputs(2);
+//  cin >> stringUserInput1 >> stringUserInput2;
+//  userInputs[0] = std::stod(stringUserInput1);
+//  userInputs[1] = std::stod(stringUserInput2);
+//
+//  MSRDMLayer::get_MSRDM_output(netState, netAction, userInputs);
+//
+//  cout << "Enter Input For Demo 2" << endl;  // Must press enter after each
+//  string stringUserInput3;
+//  string stringUserInput4;
+//  vector<double> userInputs2(2);
+//  cin >> stringUserInput3 >> stringUserInput4;
+//  userInputs2[0] = std::stod(stringUserInput3);
+//  userInputs2[1] = std::stod(stringUserInput4);
+//
+//  MSRDMLayer::get_MSRDM_output(netState, netAction, userInputs2);
 
   return 0;
 }

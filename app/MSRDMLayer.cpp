@@ -9,6 +9,7 @@
 #include <vector>
 #include <cmath>
 #include <cassert>
+#include <string>
 #include "Network.h"
 #include "Neuron.h"
 #include "Data.h"
@@ -18,17 +19,33 @@
 using std::vector;
 using std::cout;
 using std::endl;
+using std::string;
 
 MSRDMLayer::MSRDMLayer() {
 
 
 }
 
-void MSRDMLayer::get_MSRDM_output(Network& net, std::vector<double> input) {
+vector<double> MSRDMLayer::get_MSRDM_output(Network& stateNet, Network& actionNet, std::vector<double> input) {
+  // This takes both networks and feeds the input from the statenet to the actionnet
+
   vector<double> resultVals;
-  net.feed_forward(input);
-  net.get_output(resultVals);
+  //net.feed_forward(input);
+  //net.get_output(resultVals);
   Data::show_vector_vals("Trained Output:", resultVals);
+  return resultVals;
+}
+
+void MSRDMLayer::learn(vector<double> removeCase) {
+  // Takes {input,input,output} and replaces the output with another choice 1-3
+  // If the output is 4 return doing nothing
+}
+
+string MSRDMLayer::interpret_results(const std::vector<double> resultVector, int layerNum, vector<int>& result) {
+
+  string s = "";
+  return s;
+
 }
 
 void MSRDMLayer::train(Network& myNet, vector<int> topology, Data& trainData) {

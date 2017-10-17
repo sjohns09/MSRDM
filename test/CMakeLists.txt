@@ -3,7 +3,11 @@ set(GTEST_SHUFFLE 1)
 add_executable(
     cpp-test
     main.cpp
-    test.cpp
+    MSRDMLayer_test.cpp
+    ../app/MSRDMLayer.cpp
+    ../app/Network.cpp
+    ../app/Data.cpp
+    ../app/Neuron.cpp
 )
 
 target_include_directories(cpp-test PUBLIC ../vendor/googletest/googletest/include 
