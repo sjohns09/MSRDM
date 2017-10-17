@@ -63,7 +63,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForAnxious) {
 
   vector<double> inputVector = {1,0,0}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   netTest.feed_forward(inputVector);
@@ -86,7 +86,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForSad) {
 
   vector<double> inputVector = {0,0,1}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   netTest.feed_forward(inputVector);
@@ -109,7 +109,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForLethargic) {
 
   vector<double> inputVector = {0,1,0}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   netTest.feed_forward(inputVector);
@@ -132,7 +132,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForCritical) {
 
   vector<double> inputVector = {1,1,1}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   netTest.feed_forward(inputVector);
@@ -155,7 +155,7 @@ TEST(MSRDMLayer_test, testActionOutputIsComfortForAnxiousInput) {
 
   vector<double> inputVector = {1,0,0,0}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   netTest.feed_forward(inputVector);
@@ -178,7 +178,7 @@ TEST(MSRDMLayer_test, testActionOutputIsPlayForSadInput) {
 
   vector<double> inputVector = {0,1,0,0}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   netTest.feed_forward(inputVector);
@@ -201,7 +201,7 @@ TEST(MSRDMLayer_test, testActionOutputIsMotivateForLethargicInput) {
 
   vector<double> inputVector = {0,0,1,0}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   netTest.feed_forward(inputVector);
@@ -224,7 +224,7 @@ TEST(MSRDMLayer_test, testActionOutputIsEmergencyForCriticalInput) {
 
   vector<double> inputVector = {0,0,0,1}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   netTest.feed_forward(inputVector);
@@ -250,7 +250,7 @@ TEST(MSRDMLayer_test, testLearnForNegativeFeedbackOnMotivate) {
 
   vector<double> inputVector = {0,0,1,0}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   netTest.feed_forward(inputVector);
@@ -275,7 +275,7 @@ TEST(MSRDMLayer_test, testLearnForNegativeFeedbackOnEmergencyDoesNotChange) {
 
   vector<double> inputVector = {4,3}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   netTest.feed_forward(inputVector);
@@ -311,7 +311,7 @@ TEST(MSRDMLayer_test, testGetMSRDMOutputForSensorInput) {
 
   vector<double> inputVector = {1,1,1}; // Set this INPUT
   vector<double> resultsVector;
-  vector<int> trainedResultNum;
+  vector<double> trainedResultNum;
   string trainedResultString;
 
   MSRDMLayer::get_MSRDM_output(netState, netAction, inputVector);

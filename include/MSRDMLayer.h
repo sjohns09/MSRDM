@@ -21,7 +21,7 @@ class MSRDMLayer {
   static std::vector<double> get_MSRDM_output(Network& netState, Network& netAction, std::vector<double> input);
   void learn(std::vector<double> removeCase);
   void train(Network& myNet, std::vector<int> topology, Data& trainData);
-  static std::string interpret_results(const std::vector<double> resultVector, int layerNum, std::vector<int>& result);
+  static std::string interpret_results(const std::vector<double> resultVector, int layerNum, std::vector<double>& result);
   static void result_satisfaction(int satisfied);
   virtual ~MSRDMLayer();
 

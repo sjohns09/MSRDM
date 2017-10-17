@@ -45,13 +45,12 @@ int main() {
   string s1;
   string s2;
   string s3;
-  string s4;
-  vector<double> userInputs(4);
-  cin >> s1 >> s2 >> s3 >> s4;
+
+  vector<double> userInputs(3);
+  cin >> s1 >> s2 >> s3;
   userInputs[0] = std::stod(s1);
   userInputs[1] = std::stod(s2);
   userInputs[2] = std::stod(s3);
-  userInputs[3] = std::stod(s4);
 
   MSRDMLayer::get_MSRDM_output(netState, netAction, userInputs);
 

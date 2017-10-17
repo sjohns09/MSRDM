@@ -10,11 +10,11 @@
 #include <cmath>
 #include <cassert>
 #include <string>
+#include <algorithm>
 #include "Network.h"
 #include "Neuron.h"
 #include "Data.h"
 #include "MSRDMLayer.h"
-
 
 using std::vector;
 using std::cout;
@@ -23,17 +23,40 @@ using std::string;
 
 MSRDMLayer::MSRDMLayer() {
 
-
 }
 
-vector<double> MSRDMLayer::get_MSRDM_output(Network& stateNet, Network& actionNet, std::vector<double> input) {
+vector<double> MSRDMLayer::get_MSRDM_output(Network& stateNet,
+                                            Network& actionNet,
+                                            std::vector<double> input) {
   // This takes both networks and feeds the input from the statenet to the actionnet
 
-  vector<double> resultVals;
-  actionNet.feed_forward(input);
-  actionNet.get_output(resultVals);
-  Data::show_vector_vals("Trained Output:", resultVals);
-  return resultVals;
+  vector<double> stateResultVals;
+  stateNet.feed_forward(input);
+  stateNet.get_output(stateResultVals);
+
+  vector<double> stateResultInts(4);
+
+  string stateString = interpret_results(stateResultVals, 1,
+                                          stateResultInts);
+  cout << endl << "Human State: " << stateString << endl;
+  Data::show_vector_vals("Raw State Output:", stateResultVals);
+  Data::show_vector_vals("Normalized State Output:", stateResultInts);
+
+  vector<double> actionResultVals;
+  actionNet.feed_forward(stateResultInts);
+  actionNet.get_output(actionResultVals);
+
+  vector<double> actionResultInts(4);
+
+  string actionString = interpret_results(actionResultVals, 2,
+                                          actionResultInts);
+
+  cout << endl << "Robot Action Decision: " << actionString << endl;
+
+  Data::show_vector_vals("Raw Action Output:", actionResultVals);
+  Data::show_vector_vals("Normalized Action Output:", actionResultInts);
+
+  return actionResultVals;
 }
 
 void MSRDMLayer::learn(vector<double> removeCase) {
@@ -41,10 +64,56 @@ void MSRDMLayer::learn(vector<double> removeCase) {
   // If the output is 4 return doing nothing
 }
 
-string MSRDMLayer::interpret_results(const std::vector<double> resultVector, int layerNum, vector<int>& result) {
+string MSRDMLayer::interpret_results(const vector<double> resultVector,
+                                     int layerNum, vector<double>& result) {
 
-  string s = "";
-  return s;
+  string stringResult;
+
+  if (layerNum == 1) {
+    auto maxElement = *std::max_element(std::begin(resultVector),
+                                        std::end(resultVector));
+    int maxIndex;
+
+    for (int i = 0; i < resultVector.size(); i++) {
+      if (resultVector[i] == maxElement) {
+        result[i] = 1;
+        maxIndex = i;
+      } else
+        result[i] = 0;
+    }
+    if (maxIndex == 0)
+      stringResult = "ANXIOUS";
+    else if (maxIndex == 1)
+      stringResult = "SAD";
+    else if (maxIndex == 2)
+      stringResult = "LETHARGIC";
+    else if (maxIndex == 3)
+      stringResult = "CRITICAL";
+  }
+
+  if (layerNum == 2) {
+    auto maxElement = *std::max_element(std::begin(resultVector),
+                                        std::end(resultVector));
+    int maxIndex;
+
+    for (int i = 0; i < resultVector.size(); i++) {
+      if (resultVector[i] == maxElement) {
+        result[i] = 1;
+        maxIndex = i;
+      } else
+        result[i] = 0;
+    }
+    if (maxIndex == 0)
+      stringResult = "COMFORT";
+    else if (maxIndex == 1)
+      stringResult = "PLAY";
+    else if (maxIndex == 2)
+      stringResult = "MOTIVATE";
+    else if (maxIndex == 3)
+      stringResult = "EMERGENCY";
+  }
+
+  return stringResult;
 
 }
 
@@ -86,6 +155,6 @@ void MSRDMLayer::train(Network& myNet, vector<int> topology, Data& trainData) {
 }
 
 MSRDMLayer::~MSRDMLayer() {
-  // TODO Auto-generated destructor stub
+// TODO Auto-generated destructor stub
 }
 
