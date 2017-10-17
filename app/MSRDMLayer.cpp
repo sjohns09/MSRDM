@@ -30,8 +30,8 @@ vector<double> MSRDMLayer::get_MSRDM_output(Network& stateNet, Network& actionNe
   // This takes both networks and feeds the input from the statenet to the actionnet
 
   vector<double> resultVals;
-  //net.feed_forward(input);
-  //net.get_output(resultVals);
+  actionNet.feed_forward(input);
+  actionNet.get_output(resultVals);
   Data::show_vector_vals("Trained Output:", resultVals);
   return resultVals;
 }

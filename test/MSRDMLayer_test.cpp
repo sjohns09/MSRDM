@@ -24,7 +24,7 @@ TEST(MSRDMLayer_test, testStateTrainErrorIsLessThan5Percent) {  //Need to Fix Te
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = stateTopology;
-  Data trainData(folderPath + "Layer1", 0);
+  Data trainData(folderPath + "Layer1");
 
   // Topology: #inputs, #outputs, #hiddenLayers, #hiddenNeurons
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
@@ -40,7 +40,7 @@ TEST(MSRDMLayer_test, testActionTrainErrorIsLessThan5Percent) {  //Need to Fix T
   // Verify the average error is < 5% - use layer 2 topology and data
   MSRDMLayer MSRDMTest;
   vector<int> topology = actionTopology;
-  Data trainData(folderPath + "Layer2", 0);
+  Data trainData(folderPath + "Layer2");
 
   // Topology: #inputs, #outputs, #hiddenLayers, #hiddenNeurons
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
@@ -55,7 +55,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForAnxious) {
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = stateTopology;
-  Data trainData(folderPath + "Layer1", 0);
+  Data trainData(folderPath + "Layer1");
 
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
   MSRDMTest.train(netTest, topology, trainData);
@@ -78,7 +78,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForSad) {
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = stateTopology;
-  Data trainData(folderPath + "Layer1", 0);
+  Data trainData(folderPath + "Layer1");
 
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
   MSRDMTest.train(netTest, topology, trainData);
@@ -101,7 +101,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForLethargic) {
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = stateTopology;
-  Data trainData(folderPath + "Layer1", 0);
+  Data trainData(folderPath + "Layer1");
 
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
   MSRDMTest.train(netTest, topology, trainData);
@@ -124,7 +124,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForCritical) {
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = stateTopology;
-  Data trainData(folderPath + "Layer1", 0);
+  Data trainData(folderPath + "Layer1");
 
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
   MSRDMTest.train(netTest, topology, trainData);
@@ -147,7 +147,7 @@ TEST(MSRDMLayer_test, testActionOutputIsComfortForAnxiousInput) {
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = actionTopology;
-  Data trainData(folderPath + "Layer2", 0);
+  Data trainData(folderPath + "Layer2");
 
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
   MSRDMTest.train(netTest, topology, trainData);
@@ -170,7 +170,7 @@ TEST(MSRDMLayer_test, testActionOutputIsPlayForSadInput) {
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = actionTopology;
-  Data trainData(folderPath + "Layer2", 0);
+  Data trainData(folderPath + "Layer2");
 
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
   MSRDMTest.train(netTest, topology, trainData);
@@ -193,7 +193,7 @@ TEST(MSRDMLayer_test, testActionOutputIsMotivateForLethargicInput) {
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = actionTopology;
-  Data trainData(folderPath + "Layer2", 0);
+  Data trainData(folderPath + "Layer2");
 
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
   MSRDMTest.train(netTest, topology, trainData);
@@ -216,7 +216,7 @@ TEST(MSRDMLayer_test, testActionOutputIsEmergencyForCriticalInput) {
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = actionTopology;
-  Data trainData(folderPath + "Layer2", 0);
+  Data trainData(folderPath + "Layer2");
 
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
   MSRDMTest.train(netTest, topology, trainData);
@@ -240,7 +240,7 @@ TEST(MSRDMLayer_test, testLearnForNegativeFeedbackOnMotivate) {
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = actionTopology;
-  Data trainData(folderPath + "Layer2", 0);
+  Data trainData(folderPath + "Layer2");
 
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
   MSRDMTest.train(netTest, topology, trainData);
@@ -265,7 +265,7 @@ TEST(MSRDMLayer_test, testLearnForNegativeFeedbackOnEmergencyDoesNotChange) {
 
   MSRDMLayer MSRDMTest;
   vector<int> topology = actionTopology;
-  Data trainData(folderPath + "Layer2", 0);
+  Data trainData(folderPath + "Layer2");
 
   Network netTest(topology[0], topology[1], topology[2], topology[3]);
   MSRDMTest.train(netTest, topology, trainData);
@@ -292,7 +292,7 @@ TEST(MSRDMLayer_test, testGetMSRDMOutputForSensorInput) {
   MSRDMLayer actionMSRDM;
 
   // Create Network for MSRDM Layer 1
-  Data trainData1(folderPath + "Layer1", 0);
+  Data trainData1(folderPath + "Layer1");
 
   vector<int> topology1 = trainData1.read_topology();
 
@@ -301,7 +301,7 @@ TEST(MSRDMLayer_test, testGetMSRDMOutputForSensorInput) {
   stateMSRDM.train(netState, topology1, trainData1);
 
   // Create Network for MSRDM Layer 2
-  Data trainData2(folderPath + "Layer2", 0);
+  Data trainData2(folderPath + "Layer2");
 
   vector<int> topology2 = trainData2.read_topology();
 

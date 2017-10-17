@@ -14,7 +14,7 @@
 
 class Data {
  public:
-  Data(std::string folderPath, int createNewData);
+  Data(std::string folderPath);
 
   std::vector<double> read_training_data();
   std::vector<double> get_next_inputs();
@@ -30,7 +30,6 @@ class Data {
 
  private:
   std::string dataFolder;
-  void create_new_training_set();
 };
 
 #endif /* INCLUDE_DATA_H_ */

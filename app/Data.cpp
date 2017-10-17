@@ -17,32 +17,13 @@ using std::string;
 using std::endl;
 using std::stringstream;
 
-Data::Data(string folderPath, int createNewData) {
+Data::Data(string folderPath) {
   dataFolder = folderPath;
   trainingFile = dataFolder + "/TrainingData.txt";
 
   trainingDataFile.open(trainingFile.c_str());
   if (!trainingDataFile.is_open()) {
     cout << "FILE CHECK DID NOT PASS - Check that filepath exists" << std::endl;
-  }
-  trainingDataFile.close();
-
-  if (createNewData == 1) {
-    create_new_training_set();
-  }
-}
-
-void Data::create_new_training_set() {
-  //Random training sets for XOR -- two inputs and one output
-
-  trainingDataFile.open(trainingFile.c_str());
-  trainingDataFile << "topology: 2 4 1" << endl;
-  for (int i = 2000; i >= 0; --i) {
-    int n1 = (int) (2.0 * rand() / double(RAND_MAX));
-    int n2 = (int) (2.0 * rand() / double(RAND_MAX));
-    int t = n1 ^ n2;  // should be 0 or 1
-    trainingDataFile << "in: " << n1 << ".0 " << n2 << ".0 " << endl;
-    trainingDataFile << "out: " << t << ".0" << endl;
   }
   trainingDataFile.close();
 }

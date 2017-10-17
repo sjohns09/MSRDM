@@ -70,11 +70,9 @@ void Neuron::update_input_weights(NetLayer& preLayer) {
   for (int n = 0; n < preLayer.size(); n++) {
     Neuron& preNeuron = preLayer[n];
     double oldDWeight = preNeuron.outWeights[nIndex].deltaWeight;
-    //std::cout << "OldWeight = " << oldDWeight << std::endl;
 
     double newDWeight = eta * preNeuron.getOutValue() * gradient
         + alpha * oldDWeight;
-    //std::cout << "NewWeight = " << newDWeight << std::endl;
 
     preNeuron.outWeights[nIndex].deltaWeight = newDWeight;
     preNeuron.outWeights[nIndex].weight += newDWeight;

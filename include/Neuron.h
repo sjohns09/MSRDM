@@ -6,7 +6,6 @@
  */
 #include <iostream>
 #include <vector>
-//#include "NetLayer.h"
 #include "Network.h"
 
 #ifndef APP_NEURON_H_
@@ -37,7 +36,6 @@ private:
   static double transferFuncDX (double x);
   double outValue;
   std::vector<Connections> outWeights;
-//  std::vector<double> deltaWeights;
   double gradient;
   int nIndex;
 };

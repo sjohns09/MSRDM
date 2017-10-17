@@ -55,7 +55,7 @@ Network::Network(int numInputs, int numOutputs, int numHiddenLayers,
     layers.back().back().setOutValue(1.0);
   }
   errorRMS = 0.0;
-  recentAverageSmoothingFactor = 100.0;
+  recentAverageSmoothingFactor = 1;
   recentAverageError = 0;
 }
 
