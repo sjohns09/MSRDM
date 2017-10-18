@@ -11,6 +11,9 @@
 #include <cassert>
 #include <string>
 #include <algorithm>
+#include <fstream>
+#include <cstdio>
+#include <cstring>
 #include "Network.h"
 #include "Neuron.h"
 #include "Data.h"
@@ -18,10 +21,17 @@
 
 using std::vector;
 using std::cout;
+using std::cin;
 using std::endl;
 using std::string;
+using std::to_string;
+using std::ifstream;
+using std::ofstream;
 
-MSRDMLayer::MSRDMLayer() {
+string MSRDMLayer::dataFolder;
+
+MSRDMLayer::MSRDMLayer(string userDataFolder) {
+  dataFolder = userDataFolder;
 
 }
 
@@ -36,8 +46,7 @@ vector<double> MSRDMLayer::get_MSRDM_output(Network& stateNet,
 
   vector<double> stateResultInts(4);
 
-  string stateString = interpret_results(stateResultVals, 1,
-                                          stateResultInts);
+  string stateString = interpret_results(stateResultVals, 1, stateResultInts);
   cout << endl << "Human State: " << stateString << endl;
   Data::show_vector_vals("Raw State Output:", stateResultVals);
   Data::show_vector_vals("Normalized State Output:", stateResultInts);
@@ -56,12 +65,43 @@ vector<double> MSRDMLayer::get_MSRDM_output(Network& stateNet,
   Data::show_vector_vals("Raw Action Output:", actionResultVals);
   Data::show_vector_vals("Normalized Action Output:", actionResultInts);
 
+  MSRDMLayer learner(MSRDMLayer::dataFolder);
+  learner.learn(actionNet, stateString, stateResultInts, actionResultInts);
+
   return actionResultVals;
 }
 
-void MSRDMLayer::learn(vector<double> removeCase) {
-  // Takes {input,input,output} and replaces the output with another choice 1-3
-  // If the output is 4 return doing nothing
+void MSRDMLayer::learn(Network& actionNet, string stateString,
+                       vector<double> caseIn, vector<double> caseOut) {
+
+  string prefer;
+  cout << endl << "Are You Happy With Your Results? (Y/N)" << endl;
+  cin >> prefer;
+  if (prefer == "N" || prefer == "n") {
+    cout << endl << "Which action would you prefer for state " << stateString << "?" << endl;
+    if (stateString == "CRITICAL") {
+      cout << "---- For your safety this action cannot be re-learned ----" << endl;
+    } else {
+      cout << " Enter the number 1 (Comfort), 2 (Play), or 3 (Motivate)"
+           << endl;
+      cin >> prefer;
+
+      int done = Data::edit_training_data(caseIn, caseOut, stoi(prefer));
+
+      if (done == 1) {
+        MSRDMLayer learner(MSRDMLayer::dataFolder);
+        Data learnData(MSRDMLayer::dataFolder + "Layer2/");
+        vector<int> topology = { 4, 4, 1, 8 };
+        learner.train(actionNet, topology, learnData);
+        cout << "Learning Complete!" << endl;
+      } else {
+        cout << "Learning Failed..." << endl;
+      }
+    }
+  } else {
+    cout << "Yay!" << endl;
+  }
+
 }
 
 string MSRDMLayer::interpret_results(const vector<double> resultVector,
@@ -125,28 +165,21 @@ void MSRDMLayer::train(Network& myNet, vector<int> topology, Data& trainData) {
   int trainingPass = 0;
   while (!trainData.isEof()) {
     ++trainingPass;
-    cout << endl << "Pass" << trainingPass;
 
     // Get new input data and feed it forward:
     inputVals = trainData.get_next_inputs();
     if (inputVals.size() != topology[0])
       break;
-    Data::show_vector_vals(": Inputs :", inputVals);
     myNet.feed_forward(inputVals);
 
     // Collect the net's actual results:
     myNet.get_output(resultVals);
-    Data::show_vector_vals("Outputs:", resultVals);
 
     // Train the net what the outputs should have been:
     targetVals = trainData.get_target_outputs();
-    Data::show_vector_vals("Targets:", targetVals);
     assert(targetVals.size() == topology[1]);
 
     myNet.back_prop(targetVals);
-
-    // Report how well the training is working, average over recent
-    cout << "Net recent average error: " << myNet.get_recent_error() << endl;
   }
 
   cout << endl << "Done Training" << endl;

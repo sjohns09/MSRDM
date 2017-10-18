@@ -16,20 +16,21 @@ class Data {
  public:
   Data(std::string folderPath);
 
-  std::vector<double> read_training_data();
+  static void create_training_data(int layerNum, std::string userDataFolderPath);
+  static int edit_training_data(std::vector<double> removeCaseInput, std::vector<double> removeCaseOutput, int casePrefer);
   std::vector<double> get_next_inputs();
   std::vector<double> get_target_outputs();
   std::vector<int> read_topology();
-  void edit_training_data(std::string caseToRemove);
   static void show_vector_vals(std::string label, std::vector<double> v);
   bool isEof(void);
   std::fstream trainingDataFile;
   std::string trainingFile;
+  static std::string dataFolder;
 
   virtual ~Data();
 
  private:
-  std::string dataFolder;
+
 };
 
 #endif /* INCLUDE_DATA_H_ */

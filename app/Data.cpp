@@ -9,6 +9,8 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <cstdio>
+#include <cstring>
 #include "Data.h"
 
 using std::cout;
@@ -16,10 +18,16 @@ using std::vector;
 using std::string;
 using std::endl;
 using std::stringstream;
+using std::fstream;
+using std::to_string;
+using std::ifstream;
+using std::ofstream;
 
-Data::Data(string folderPath) {
-  dataFolder = folderPath;
-  trainingFile = dataFolder + "/TrainingData.txt";
+string Data::dataFolder;
+
+Data::Data(string layerFolderPath) {
+  dataFolder = layerFolderPath;
+  trainingFile = dataFolder + "TrainingData.txt";
 
   trainingDataFile.open(trainingFile.c_str());
   if (!trainingDataFile.is_open()) {
@@ -28,6 +36,127 @@ Data::Data(string folderPath) {
   trainingDataFile.close();
 }
 
+void Data::create_training_data(int layerNum, string userDataFolder) {
+
+  // Create Test Data File For Layer1
+  fstream createDataFile;
+
+  if (layerNum == 1) {
+    createDataFile.open(userDataFolder + "Layer1/TrainingData.txt");
+    if (!createDataFile.is_open())
+      cout << "CANT FIND FILE";
+
+    createDataFile << "topology: 3 4 1 6" << endl;
+
+    for (int i = 0; i <= 300; i++) {
+      createDataFile << "in: 1 0 0" << endl;
+      createDataFile << "out: 1 0 0 0" << endl;
+
+      createDataFile << "in: 0 1 0" << endl;
+      createDataFile << "out: 0 0 1 0" << endl;
+
+      createDataFile << "in: 0 0 1" << endl;
+      createDataFile << "out: 0 1 0 0" << endl;
+
+      createDataFile << "in: 1 1 1" << endl;
+      createDataFile << "out: 0 0 0 1" << endl;
+
+      createDataFile << "in: 1 1 0" << endl;
+      createDataFile << "out: 1 0 0 0" << endl;
+
+      createDataFile << "in: 1 0 1" << endl;
+      createDataFile << "out: 0 1 0 0" << endl;
+
+      createDataFile << "in: 0 1 1" << endl;
+      createDataFile << "out: 0 1 0 0" << endl;
+
+    }
+    createDataFile.close();
+  }
+
+  // Create Test Data File For Layer2
+  if (layerNum == 2) {
+    createDataFile.open(userDataFolder + "Layer2/TrainingData.txt");
+    if (!createDataFile.is_open())
+      cout << "CANT FIND FILE";
+
+    createDataFile << "topology: 4 4 1 8" << endl;
+
+    for (int i = 0; i <= 500; i++) {
+      createDataFile << "in: 1 0 0 0" << endl;
+      createDataFile << "out: 1 0 0 0" << endl;
+
+      createDataFile << "in: 0 1 0 0" << endl;
+      createDataFile << "out: 0 1 0 0" << endl;
+
+      createDataFile << "in: 0 0 1 0" << endl;
+      createDataFile << "out: 0 0 1 0" << endl;
+
+      createDataFile << "in: 0 0 0 1" << endl;
+      createDataFile << "out: 0 0 0 1" << endl;
+
+    }
+    createDataFile.close();
+  }
+}
+
+int Data::edit_training_data(std::vector<double> caseIn, std::vector<double> caseOut, int prefer) {
+
+  if (caseIn[3] == 1) {
+      return 1;
+    } else {
+      string ogFilePath = dataFolder + "TrainingData.txt";
+      string tempFilePath = dataFolder + "Temp.txt";
+
+      string caseReplace;
+      switch (prefer) {
+        case 1:
+          caseReplace = "out: 1 0 0 0";
+          break;
+        case 2:
+          caseReplace = "out: 0 1 0 0";
+          break;
+        case 3:
+          caseReplace = "out: 0 0 1 0";
+          break;
+      }
+
+      string changeIn = "in: " + to_string((int)caseIn[0]) + " " + to_string((int)caseIn[1]) + " "
+          + to_string((int)caseIn[2]) + " " + to_string((int)caseIn[3]);
+      string changeOut = "out: " + to_string((int)caseOut[0]) + " " + to_string((int)caseOut[1]) + " "
+          + to_string((int)caseOut[2]) + " " + to_string((int)caseOut[3]);
+
+      ifstream ogFile(ogFilePath);
+      ofstream tempFile(tempFilePath);
+
+      if (!ogFile.is_open() || !tempFile.is_open())
+        cout << "Could not open training files, check file path" << endl;
+
+      string temp;
+      int i = 1;
+      int line;
+      while (getline(ogFile,temp)) {
+        if (temp == changeIn) {
+          line = i;
+        }
+        if (i == line+1 && temp == changeOut) {
+          temp = caseReplace;
+        }
+        tempFile << temp << endl;
+        i++;
+      }
+
+      if (remove(ogFilePath.c_str()) == 0)
+        if (rename(tempFilePath.c_str(), ogFilePath.c_str()) != 0) {
+          cout << "Error Rewriting Training File" << endl;
+          return 0;
+        } else {
+          remove(tempFilePath.c_str());
+          return 1;
+        }
+    }
+  return 0;
+}
 vector<int> Data::read_topology() {
 
   trainingDataFile.open(trainingFile.c_str());
@@ -96,18 +225,15 @@ vector<double> Data::get_target_outputs() {
   return targetOutputVals;
 }
 
-void Data::show_vector_vals(string label, vector<double> v)
-{
+void Data::show_vector_vals(string label, vector<double> v) {
   cout << label << " ";
-  for(unsigned i = 0; i < v.size(); ++i)
-  {
+  for (unsigned i = 0; i < v.size(); ++i) {
     cout << v[i] << " ";
   }
   cout << endl;
 }
 
-bool Data::isEof()
-{
+bool Data::isEof() {
   bool isEof = trainingDataFile.eof();
   return isEof;
 }

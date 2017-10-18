@@ -21,7 +21,6 @@ Neuron::Neuron(int numOutConnections, int index) {
   }
   nIndex = index;
 
-  std::cout << numOutConnections << std::endl;
 }
 
 double Neuron::initial_weight() {

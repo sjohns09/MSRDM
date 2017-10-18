@@ -26,7 +26,6 @@ Network::Network(int numInputs, int numOutputs, int numHiddenLayers,
 
   for (int layerNum = 0; layerNum < numLayers; layerNum++) {
     layers.push_back(NetLayer());
-    cout << "New Layer!" << endl;
 
     if (layerNum < numLayers - 2)
       numOutConnections = hiddenNum;
@@ -38,25 +37,20 @@ Network::Network(int numInputs, int numOutputs, int numHiddenLayers,
     if (layerNum != numLayers - 1 && layerNum != 0) {  //Hidden
       for (int i = 0; i < hiddenNum; i++) {
         layers[layerNum].push_back(Neuron(numOutConnections, i));
-        cout << "Neuron" << endl;
       }
     } else if (layerNum == 0) {  //input
       for (int i = 0; i < inputNum; i++) {
         layers[layerNum].push_back(Neuron(numOutConnections, i));
-        cout << "Neuron" << endl;
       }
     } else {  //output
       for (int i = 0; i < outputNum; i++) {
         layers[layerNum].push_back(Neuron(numOutConnections, i));
-        cout << "Neuron" << endl;
       }
     }
     // Bias Neuron constant output of 1.0
     layers.back().back().setOutValue(1.0);
   }
   errorRMS = 0.0;
-  recentAverageSmoothingFactor = 1;
-  recentAverageError = 0;
 }
 
 void Network::feed_forward(const vector<double>& inputs) {
@@ -85,10 +79,6 @@ void Network::back_prop(const std::vector<double>& targets) {
     errorRMS += pow(delta, 2);
   }
   errorRMS = sqrt((1 / (outputNum - 1)) * errorRMS);
-
-  //Get Recent Error
-  recentAverageError = (recentAverageError * recentAverageSmoothingFactor
-      + errorRMS) / (recentAverageSmoothingFactor + 1.0);
 
   // Get output layer gradients
   for (int n = 0; n < outputNum - 1; n++) {

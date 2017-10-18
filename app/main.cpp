@@ -17,12 +17,19 @@ using std::fstream;
 
 int main() {
 
-  MSRDMLayer stateMSRDM;
-  MSRDMLayer actionMSRDM;
+  string userDataFolder =
+      "/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/Data/";
+
+  // ------ Create Data Files --------
+  Data::create_training_data(1, userDataFolder);
+  Data::create_training_data(2, userDataFolder);
+  // ---------------------------------
+
+  MSRDMLayer stateMSRDM(userDataFolder);
+  MSRDMLayer actionMSRDM(userDataFolder);
 
   // Create Network for MSRDM Layer 1
-  Data trainData1("/home/sammie/eclipse-workspace/SoftDev_Robotics"
-                  "/Midterm/MSRDM/Data/Layer1");
+  Data trainData1(userDataFolder + "Layer1/");
 
   vector<int> topology1 = trainData1.read_topology();
 
@@ -31,8 +38,7 @@ int main() {
   stateMSRDM.train(netState, topology1, trainData1);
 
   // Create Network for MSRDM Layer 2
-  Data trainData2("/home/sammie/eclipse-workspace/SoftDev_Robotics"
-                  "/Midterm/MSRDM/Data/Layer2");
+  Data trainData2(userDataFolder + "Layer2/");
 
   vector<int> topology2 = trainData2.read_topology();
 
@@ -41,7 +47,15 @@ int main() {
   actionMSRDM.train(netAction, topology2, trainData2);
 
   // DEMO
-  cout << "Enter Input For Demo 1" << endl;  // Must press enter after each
+  cout << endl << "---- Welcome to the Mental State Reactionary Decision Maker Demo! ----"
+       << endl;
+string s;
+  while (s != "DONE") {
+
+  cout << "Enter a 0 or 1 for each sensor to show it has triggered" << endl
+       << "Press Enter After Each Input" << endl
+       << "Sensor 1: HeartRateElevated" << endl << "Sensor 2: Motion Low"
+       << endl << "Sensor 3: Distressed Voice" << endl;  // Must press enter after each
   string s1;
   string s2;
   string s3;
@@ -54,67 +68,13 @@ int main() {
 
   MSRDMLayer::get_MSRDM_output(netState, netAction, userInputs);
 
+  cout << endl << "Enter 'DONE' to end the demo or 'GO' to keep testing" << endl;
+  cin >> s;
+  }
+
+  cout << endl << "---- END OF DEMO ----";
   return 0;
 }
 
 // ---------------------------------------------------------------------------
-// USED TO CREATE TEST DATA FILES (commented out because only needed to run once)
-//  // Create Test Data File For Layer1
-//  fstream trainingDataFile;
-//  trainingDataFile.open("/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/Data/Layer1/TrainingData.txt");
-//  if (!trainingDataFile.is_open())
-//    cout << "CANT FIND FILE";
-//
-//  trainingDataFile << "topology: 3 4 1 6" << endl;
-//
-//  for (int i = 0; i <= 300; i++) {
-//    trainingDataFile << "in: 1 0 0" << endl;
-//    trainingDataFile << "out: 1 0 0 0" <<  endl;
-//
-//    trainingDataFile << "in: 0 1 0" << endl;
-//    trainingDataFile << "out: 0 0 1 0" <<  endl;
-//
-//    trainingDataFile << "in: 0 0 1" << endl;
-//    trainingDataFile << "out: 0 1 0 0" <<  endl;
-//
-//    trainingDataFile << "in: 1 1 1" << endl;
-//    trainingDataFile << "out: 0 0 0 1" <<  endl;
-//
-//    trainingDataFile << "in: 1 1 0" << endl;
-//    trainingDataFile << "out: 1 0 0 0" <<  endl;
-//
-//    trainingDataFile << "in: 1 0 1" << endl;
-//    trainingDataFile << "out: 0 1 0 0" <<  endl;
-//
-//    trainingDataFile << "in: 0 1 1" << endl;
-//    trainingDataFile << "out: 0 1 0 0" <<  endl;
-//
-//  }
-//  trainingDataFile.close();
-//
-
-//  // Create Test Data File For Layer2
-//  fstream trainingDataFile;
-//  trainingDataFile.open("/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/Data/Layer2/TrainingData.txt");
-//  if (!trainingDataFile.is_open())
-//    cout << "CANT FIND FILE";
-//
-//  trainingDataFile << "topology: 4 4 1 8" << endl;
-//
-//  for (int i = 0; i <= 500; i++) {
-//    trainingDataFile << "in: 1 0 0 0" << endl;
-//    trainingDataFile << "out: 1 0 0 0" <<  endl;
-//
-//    trainingDataFile << "in: 0 1 0 0" << endl;
-//    trainingDataFile << "out: 0 1 0 0" <<  endl;
-//
-//    trainingDataFile << "in: 0 0 1 0" << endl;
-//    trainingDataFile << "out: 0 0 1 0" <<  endl;
-//
-//    trainingDataFile << "in: 0 0 0 1" << endl;
-//    trainingDataFile << "out: 0 0 0 1" <<  endl;
-//
-//
-//  }
-//  trainingDataFile.close();
 
