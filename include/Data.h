@@ -29,8 +29,6 @@ class Data {
 
   virtual ~Data();
 
- private:
-
 };
 
 #endif /* INCLUDE_DATA_H_ */
