@@ -1,8 +1,17 @@
-/*
- * MSRDMLayer.cpp
+/** @file MSRDM.cpp
+ * @brief This class is the backbone of the MSRDM module
  *
- *  Created on: Oct 14, 2017
- *      Author: sammie
+ * @author Samantha Johnson
+ * @date October 17, 2017
+ * @copyright [2017] <Samantha Johnson>
+ *
+ * @details Utilizes the neural net classes to create a robot that is capable of training
+ * on a set of input to provide suitable actions for its human user, and also learning
+ * how to improve those actions based on feedback from the human.
+ *
+ * Parts of this class utilized the training video by David Miller (https://vimeo.com/19569529)
+ * called "Neural Net in C++ Tutorial", to develop the neural net framework.
+ * All code was written by the author of this document.
  */
 
 #include <iostream>
@@ -78,9 +87,11 @@ void MSRDMLayer::learn(Network& actionNet, string stateString,
   cout << endl << "Are You Happy With Your Results? (Y/N)" << endl;
   cin >> prefer;
   if (prefer == "N" || prefer == "n") {
-    cout << endl << "Which action would you prefer for state " << stateString << "?" << endl;
+    cout << endl << "Which action would you prefer for state " << stateString
+         << "?" << endl;
     if (stateString == "CRITICAL") {
-      cout << "---- For your safety this action cannot be re-learned ----" << endl;
+      cout << "---- For your safety this action cannot be re-learned ----"
+           << endl;
     } else {
       cout << " Enter the number 1 (Comfort), 2 (Play), or 3 (Motivate)"
            << endl;
@@ -118,8 +129,9 @@ string MSRDMLayer::interpret_results(const vector<double> resultVector,
       if (resultVector[i] == maxElement) {
         result[i] = 1;
         maxIndex = i;
-      } else
+      } else {
         result[i] = 0;
+      }
     }
     if (maxIndex == 0)
       stringResult = "ANXIOUS";
@@ -140,8 +152,9 @@ string MSRDMLayer::interpret_results(const vector<double> resultVector,
       if (resultVector[i] == maxElement) {
         result[i] = 1;
         maxIndex = i;
-      } else
+      } else {
         result[i] = 0;
+      }
     }
     if (maxIndex == 0)
       stringResult = "COMFORT";

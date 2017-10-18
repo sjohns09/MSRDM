@@ -1,9 +1,17 @@
-/*
- * Data.cpp
+/** @file Data.cpp
+ * @brief This class reads and writes the training data for the neural net
  *
- *  Created on: Oct 14, 2017
- *      Author: sammie
+ * @author Samantha Johnson
+ * @date October 17, 2017
+ * @copyright [2017] <Samantha Johnson>
+ *
+ * @details Reads and writes training data using a specified file location.
+ *
+ * Parts of this class utilized the training video by David Miller (https://vimeo.com/19569529)
+ * called "Neural Net in C++ Tutorial", to develop the neural net framework.
+ * All code was written by the author of this document.
  */
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -100,61 +108,64 @@ void Data::create_training_data(int layerNum, string userDataFolder) {
   }
 }
 
-int Data::edit_training_data(std::vector<double> caseIn, std::vector<double> caseOut, int prefer) {
+int Data::edit_training_data(std::vector<double> caseIn,
+                             std::vector<double> caseOut, int prefer) {
 
   if (caseIn[3] == 1) {
-      return 1;
-    } else {
-      string ogFilePath = dataFolder + "TrainingData.txt";
-      string tempFilePath = dataFolder + "Temp.txt";
+    return 1;
+  } else {
+    string ogFilePath = dataFolder + "TrainingData.txt";
+    string tempFilePath = dataFolder + "Temp.txt";
 
-      string caseReplace;
-      switch (prefer) {
-        case 1:
-          caseReplace = "out: 1 0 0 0";
-          break;
-        case 2:
-          caseReplace = "out: 0 1 0 0";
-          break;
-        case 3:
-          caseReplace = "out: 0 0 1 0";
-          break;
-      }
-
-      string changeIn = "in: " + to_string((int)caseIn[0]) + " " + to_string((int)caseIn[1]) + " "
-          + to_string((int)caseIn[2]) + " " + to_string((int)caseIn[3]);
-      string changeOut = "out: " + to_string((int)caseOut[0]) + " " + to_string((int)caseOut[1]) + " "
-          + to_string((int)caseOut[2]) + " " + to_string((int)caseOut[3]);
-
-      ifstream ogFile(ogFilePath);
-      ofstream tempFile(tempFilePath);
-
-      if (!ogFile.is_open() || !tempFile.is_open())
-        cout << "Could not open training files, check file path" << endl;
-
-      string temp;
-      int i = 1;
-      int line;
-      while (getline(ogFile,temp)) {
-        if (temp == changeIn) {
-          line = i;
-        }
-        if (i == line+1 && temp == changeOut) {
-          temp = caseReplace;
-        }
-        tempFile << temp << endl;
-        i++;
-      }
-
-      if (remove(ogFilePath.c_str()) == 0)
-        if (rename(tempFilePath.c_str(), ogFilePath.c_str()) != 0) {
-          cout << "Error Rewriting Training File" << endl;
-          return 0;
-        } else {
-          remove(tempFilePath.c_str());
-          return 1;
-        }
+    string caseReplace;
+    switch (prefer) {
+      case 1:
+        caseReplace = "out: 1 0 0 0";
+        break;
+      case 2:
+        caseReplace = "out: 0 1 0 0";
+        break;
+      case 3:
+        caseReplace = "out: 0 0 1 0";
+        break;
     }
+
+    string changeIn = "in: " + to_string(static_cast<int>(caseIn[0])) + " "
+        + to_string(static_cast<int>(caseIn[1])) + " " + to_string(static_cast<int>(caseIn[2])) + " "
+        + to_string(static_cast<int>(caseIn[3]));
+    string changeOut = "out: " + to_string(static_cast<int>(caseOut[0])) + " "
+        + to_string(static_cast<int>(caseOut[1])) + " " + to_string(static_cast<int>(caseOut[2])) + " "
+        + to_string(static_cast<int>(caseOut[3]));
+
+    ifstream ogFile(ogFilePath);
+    ofstream tempFile(tempFilePath);
+
+    if (!ogFile.is_open() || !tempFile.is_open())
+      cout << "Could not open training files, check file path" << endl;
+
+    string temp;
+    int i = 1;
+    int line;
+    while (getline(ogFile, temp)) {
+      if (temp == changeIn) {
+        line = i;
+      }
+      if (i == line + 1 && temp == changeOut) {
+        temp = caseReplace;
+      }
+      tempFile << temp << endl;
+      i++;
+    }
+
+    if (remove(ogFilePath.c_str()) == 0)
+      if (rename(tempFilePath.c_str(), ogFilePath.c_str()) != 0) {
+        cout << "Error Rewriting Training File" << endl;
+        return 0;
+      } else {
+        remove(tempFilePath.c_str());
+        return 1;
+      }
+  }
   return 0;
 }
 vector<int> Data::read_topology() {

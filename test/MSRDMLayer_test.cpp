@@ -1,8 +1,9 @@
-/*
- * MSRDMLayer_test.cpp
+/** @file MSRDMLayer_test.cpp
+ * @brief The Mental State Reactionary Decision Maker Tests
  *
- *  Created on: Oct 14, 2017
- *      Author: sammie
+ * @author Samantha Johnson
+ * @date October 17, 2017
+ * @copyright [2017] <Samantha Johnson>
  */
 
 #include <gtest/gtest.h>
@@ -229,7 +230,7 @@ TEST(MSRDMLayer_test, testActionOutputIsEmergencyForCriticalInput) {
 }
 
 
-//TEST(MSRDMLayer_test, testLearnForNegativeFeedbackOnMotivate) {
+// TEST(MSRDMLayer_test, testLearnForNegativeFeedbackOnMotivate) {
 //
 //  MSRDMLayer MSRDMTest(folderPath);
 //  vector<int> topology = actionTopology;
@@ -257,7 +258,7 @@ TEST(MSRDMLayer_test, testActionOutputIsEmergencyForCriticalInput) {
 //  EXPECT_NE("MOTIVATE", trainedResultString);
 //}
 //
-//TEST(MSRDMLayer_test, testLearnForNegativeFeedbackOnEmergencyDoesNotChange) {
+// TEST(MSRDMLayer_test, testLearnForNegativeFeedbackOnEmergencyDoesNotChange) {
 //
 //  MSRDMLayer MSRDMTest(folderPath);
 //  vector<int> topology = actionTopology;
@@ -284,7 +285,7 @@ TEST(MSRDMLayer_test, testActionOutputIsEmergencyForCriticalInput) {
 //  EXPECT_EQ("EMERGENCY", trainedResultString);
 //}
 //
-//TEST(MSRDMLayer_test, testGetMSRDMOutputForSensorInput) {
+// TEST(MSRDMLayer_test, testGetMSRDMOutputForSensorInput) {
 //
 //  MSRDMLayer stateMSRDM(folderPath);
 //  MSRDMLayer actionMSRDM(folderPath);

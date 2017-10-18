@@ -1,9 +1,18 @@
-/*
- * Neuron.cpp
+/** @file Neuron.cpp
+ * @brief This class represents a neuron in a neural net.
  *
- *  Created on: Oct 14, 2017
- *      Author: sammie
+ * @author Samantha Johnson
+ * @date October 17, 2017
+ * @copyright [2017] <Samantha Johnson>
+ *
+ * @details Represents a neuron of a neural net and performs many of the necessary
+ * calculations for the weighting and training on the network.
+ *
+ * This class utilized the training video by David Miller (https://vimeo.com/19569529)
+ * called "Neural Net in C++ Tutorial", to develop the neural net framework.
+ * All code was written by the author of this document.
  */
+
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -24,7 +33,7 @@ Neuron::Neuron(int numOutConnections, int index) {
 }
 
 double Neuron::initial_weight() {
-  return rand()/double(RAND_MAX);
+  return rand() / static_cast<double>(RAND_MAX);
 }
 
 void Neuron::setOutValue(double value) {
@@ -38,7 +47,7 @@ double Neuron::getOutValue() {
 void Neuron::feed_forward(const NetLayer& preLayer) {
   double sum = 0.0;
   for (auto neuron : preLayer) {
-    sum += neuron.getOutValue()*neuron.outWeights[nIndex].weight;
+    sum += neuron.getOutValue() * neuron.outWeights[nIndex].weight;
   }
 
   outValue = transferFunc(sum);
@@ -49,7 +58,7 @@ double Neuron::transferFunc(double x) {
 }
 
 double Neuron::transferFuncDX(double x) {
-  return 1.0 - x*x; //1-(pow(tanh(x),2)) // or 1.0 - x*x
+  return 1.0 - x * x;
 }
 
 void Neuron::get_out_gradients(double targetVal) {
@@ -59,7 +68,7 @@ void Neuron::get_out_gradients(double targetVal) {
 
 void Neuron::get_hidden_gradients(const NetLayer& nextLayer) {
   double sum = 0.0;
-  for (int n = 0; n < nextLayer.size()-1; n++) {
+  for (int n = 0; n < nextLayer.size() - 1; n++) {
     sum += outWeights[n].weight * nextLayer[n].gradient;
   }
   gradient = sum * transferFuncDX(outValue);
@@ -79,6 +88,6 @@ void Neuron::update_input_weights(NetLayer& preLayer) {
 }
 
 Neuron::~Neuron() {
-  // TODO Auto-generated destructor stub
+
 }
 

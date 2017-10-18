@@ -1,9 +1,18 @@
-/*
- * Network.cpp
+/** @file Network.cpp
+ * @brief This class utilizes the functionality of the network of a Neural Net
  *
- *  Created on: Oct 14, 2017
- *      Author: sammie
+ * @author Samantha Johnson
+ * @date October 17, 2017
+ * @copyright [2017] <Samantha Johnson>
+ *
+ * @details Represents the network of a neural net and performs the looping and processing
+ * necessary to train the network and get results from it.
+ *
+ * This class utilized the training video by David Miller (https://vimeo.com/19569529)
+ * called "Neural Net in C++ Tutorial", to develop the neural net framework.
+ * All code was written by the author of this document.
  */
+
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -18,10 +27,10 @@ using std::endl;
 
 Network::Network(int numInputs, int numOutputs, int numHiddenLayers,
                  int numHiddenNeuron) {
-  numLayers = numHiddenLayers + 2;  //Hidden Layers + In and Out Layer
+  numLayers = numHiddenLayers + 2;  // Hidden Layers + In and Out Layer
   outputNum = numOutputs + 1;  // includes bias neuron
-  inputNum = numInputs + 1;  //includes bias neuron
-  hiddenNum = numHiddenNeuron + 1;  //includes bias neuron
+  inputNum = numInputs + 1;  // includes bias neuron
+  hiddenNum = numHiddenNeuron + 1;  // includes bias neuron
   int numOutConnections;
 
   for (int layerNum = 0; layerNum < numLayers; layerNum++) {
@@ -34,15 +43,15 @@ Network::Network(int numInputs, int numOutputs, int numHiddenLayers,
     else
       numOutConnections = 0;
 
-    if (layerNum != numLayers - 1 && layerNum != 0) {  //Hidden
+    if (layerNum != numLayers - 1 && layerNum != 0) {  // Hidden
       for (int i = 0; i < hiddenNum; i++) {
         layers[layerNum].push_back(Neuron(numOutConnections, i));
       }
-    } else if (layerNum == 0) {  //input
+    } else if (layerNum == 0) {  // input
       for (int i = 0; i < inputNum; i++) {
         layers[layerNum].push_back(Neuron(numOutConnections, i));
       }
-    } else {  //output
+    } else {  // output
       for (int i = 0; i < outputNum; i++) {
         layers[layerNum].push_back(Neuron(numOutConnections, i));
       }
@@ -56,7 +65,7 @@ Network::Network(int numInputs, int numOutputs, int numHiddenLayers,
 void Network::feed_forward(const vector<double>& inputs) {
   int i = 0;
   for (auto input : inputs) {
-    layers[0][i].setOutValue(input);  //Set rand input weights to input layer
+    layers[0][i].setOutValue(input);  // Set rand input weights to input layer
     i++;
   }
 
@@ -73,7 +82,7 @@ void Network::back_prop(const std::vector<double>& targets) {
   NetLayer& outputLayer = layers.back();
   errorRMS = 0.0;
 
-  //Get RMS error
+  // Get RMS error
   for (int n = 0; n < outputNum - 1; n++) {
     double delta = targets[n] - outputLayer[n].getOutValue();
     errorRMS += pow(delta, 2);

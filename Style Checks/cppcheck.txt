@@ -1,0 +1,47 @@
+ALL ARE GOOGLE TEST ERRORS
+
+
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest-death-test.cc;833;style;unusedFunction;The function 'AssumeRole' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googlemock/test/gmock-generated-actions_test.cc;89;style;unusedFunction;The function 'ByNonConstRef' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1437;style;unusedFunction;The function 'CmpHelperEQ' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1479;style;unusedFunction;The function 'CmpHelperGE' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1482;style;unusedFunction;The function 'CmpHelperGT' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1473;style;unusedFunction;The function 'CmpHelperLE' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1476;style;unusedFunction;The function 'CmpHelperLT' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1470;style;unusedFunction;The function 'CmpHelperNE' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1503;style;unusedFunction;The function 'CmpHelperSTRCASEEQ' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1533;style;unusedFunction;The function 'CmpHelperSTRCASENE' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1487;style;unusedFunction;The function 'CmpHelperSTREQ' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1519;style;unusedFunction;The function 'CmpHelperSTRNE' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/samples/sample6_unittest.cc;48;style;unusedFunction;The function 'CreatePrimeTable<OnTheFlyPrimeTable>' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/samples/sample6_unittest.cc;53;style;unusedFunction;The function 'CreatePrimeTable<PreCalculatedPrimeTable>' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1362;style;unusedFunction;The function 'DoubleNearPredFormat' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/test/gtest_unittest.cc;3451;style;unusedFunction;The function 'EditsToString' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;3382;style;unusedFunction;The function 'EscapeXmlText' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest-death-test.cc;219;style;unusedFunction;The function 'ExitedUnsuccessfully' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;1346;style;unusedFunction;The function 'GetBoolAssertionFailureMessage' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googlemock/test/gmock-matchers_test.cc;920;style;unusedFunction;The function 'IsTypeOf' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;2543;style;unusedFunction;The function 'MakeAndRegisterTestInfo' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest-death-test.cc;1294;style;unusedFunction;The function 'ParseInternalRunDeathTestFlag' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest-printers.cc;114;style;unusedFunction;The function 'PrintBytesInObjectTo' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest-printers.cc;354;style;unusedFunction;The function 'PrintStringTo' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest-printers.cc;360;style;unusedFunction;The function 'PrintWideStringTo' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googlemock/src/gmock-internal-utils.cc;78;style;unusedFunction;The function 'ReportFailure' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest.cc;2561;style;unusedFunction;The function 'ReportInvalidTestCaseType' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/test/gtest_unittest.cc;89;style;unusedFunction;The function 'Send' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googlemock/test/gmock-spec-builders_test.cc;55;style;unusedFunction;The function 'SetCallCount' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest-port.cc;1108;style;unusedFunction;The function 'SetInjectableArgvs' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/test/gtest-death-test_test.cc;1021;style;unusedFunction;The function 'SetUpTestCase' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/test/gtest-death-test_test.cc;1026;style;unusedFunction;The function 'TearDownTestCase' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest-printers.cc;309;style;unusedFunction;The function 'UniversalPrintArray' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googlemock/test/gmock-more-actions_test.cc;120;style;unusedFunction;The function 'VoidFunctionWithFourArguments' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googlemock/test/gmock-generated-actions_test.cc;101;style;unusedFunction;The function 'VoidTernary' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googlemock/test/gmock-more-actions_test.cc;95;style;unusedFunction;The function 'VoidUnary' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/src/gtest-death-test.cc;810;style;unusedFunction;The function 'Wait' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/test/gtest-filepath_test.cc;75;style;unusedFunction;The function '_rmdir' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googlemock/test/gmock-spec-builders_test.cc;2632;style;unusedFunction;The function 'gmock_main' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googlemock/test/gmock-actions_test.cc;619;style;unusedFunction;The function 'operatorDestinationType' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/samples/sample10_unittest.cc;61;style;unusedFunction;The function 'operatordelete' is never used.
+/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/vendor/googletest/googletest/samples/sample10_unittest.cc;56;style;unusedFunction;The function 'operatornew' is never used.
+;;information;missingInclude;Cppcheck cannot find all the include files (use --check-config for details)
+Duration 22505 ms.

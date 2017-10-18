@@ -1,12 +1,26 @@
+/** @file main.cpp
+ * @brief The Mental State Reactionary Decision Maker
+ *
+ * @author Samantha Johnson
+ * @date October 17, 2017
+ * @copyright [2017] <Samantha Johnson>
+ *
+ * @details Allows for a robot to interact with a human and determine the human's state
+ * and the robot to then choose an action based on that state. There is also a demo that
+ * shows functionality when this program is run.
+ *
+ * All code was written by the author of this document.
+ */
+
 #include <iostream>
-#include <lib.hpp>
+#include <vector>
+#include <cassert>
+#include <fstream>
+#include <string>
 #include "Network.h"
 #include "Neuron.h"
 #include "Data.h"
 #include "MSRDMLayer.h"
-#include <vector>
-#include <cassert>
-#include <fstream>
 
 using std::vector;
 using std::cout;
@@ -47,29 +61,32 @@ int main() {
   actionMSRDM.train(netAction, topology2, trainData2);
 
   // DEMO
-  cout << endl << "---- Welcome to the Mental State Reactionary Decision Maker Demo! ----"
-       << endl;
-string s;
+  cout
+      << endl
+      << "---- Welcome to the Mental State Reactionary Decision Maker Demo! ----"
+      << endl;
+  string s;
   while (s != "DONE") {
 
-  cout << "Enter a 0 or 1 for each sensor to show it has triggered" << endl
-       << "Press Enter After Each Input" << endl
-       << "Sensor 1: HeartRateElevated" << endl << "Sensor 2: Motion Low"
-       << endl << "Sensor 3: Distressed Voice" << endl;  // Must press enter after each
-  string s1;
-  string s2;
-  string s3;
+    cout << "Enter a 0 or 1 for each sensor to show it has triggered" << endl
+         << "Press Enter After Each Input" << endl
+         << "Sensor 1: HeartRateElevated" << endl << "Sensor 2: Motion Low"
+         << endl << "Sensor 3: Distressed Voice" << endl;  // Must press enter after each
+    string s1;
+    string s2;
+    string s3;
 
-  vector<double> userInputs(3);
-  cin >> s1 >> s2 >> s3;
-  userInputs[0] = std::stod(s1);
-  userInputs[1] = std::stod(s2);
-  userInputs[2] = std::stod(s3);
+    vector<double> userInputs(3);
+    cin >> s1 >> s2 >> s3;
+    userInputs[0] = std::stod(s1);
+    userInputs[1] = std::stod(s2);
+    userInputs[2] = std::stod(s3);
 
-  MSRDMLayer::get_MSRDM_output(netState, netAction, userInputs);
+    MSRDMLayer::get_MSRDM_output(netState, netAction, userInputs);
 
-  cout << endl << "Enter 'DONE' to end the demo or 'GO' to keep testing" << endl;
-  cin >> s;
+    cout << endl << "Enter 'DONE' to end the demo or 'GO' to keep testing"
+         << endl;
+    cin >> s;
   }
 
   cout << endl << "---- END OF DEMO ----";
