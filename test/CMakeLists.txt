@@ -10,6 +10,6 @@ add_executable(
     ../app/Neuron.cpp
 )
 
-target_include_directories(cpp-test PUBLIC ../vendor/googletest/googletest/include 
+target_include_directories(cpp-test PUBLIC ../vendor/googletest/googletest/include
                                            ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(cpp-test PUBLIC gtest)

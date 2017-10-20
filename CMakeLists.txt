@@ -11,7 +11,7 @@ if (COVERAGE)
     include(CodeCoverage)
     set(LCOV_REMOVE_EXTRA "'vendor/*'")
     setup_target_for_coverage(code_coverage test/cpp-test coverage)
-    set(COVERAGE_SRCS app/main.cpp include/lib.hpp app/Data.cpp
+    set(COVERAGE_SRCS app/main.cpp app/Data.cpp
     	app/MSRDMLayer.cpp app/Network.cpp app/Neuron.cpp include/Data.h
     	include/MSRDMLayer.h include/Network.h include/Neuron.h)
 
@@ -29,3 +29,4 @@ set(CMAKE_CXX_STANDARD 14)
 add_subdirectory(app)
 add_subdirectory(test)
 add_subdirectory(vendor/googletest/googletest)
+

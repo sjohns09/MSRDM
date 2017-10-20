@@ -47,7 +47,6 @@ MSRDMLayer::MSRDMLayer(string userDataFolder) {
 vector<double> MSRDMLayer::get_MSRDM_output(Network& stateNet,
                                             Network& actionNet,
                                             std::vector<double> input) {
-  // This takes both networks and feeds the input from the statenet to the actionnet
 
   vector<double> stateResultVals;
   stateNet.feed_forward(input);
@@ -85,7 +84,7 @@ void MSRDMLayer::learn(Network& actionNet, string stateString,
 
   string prefer;
   cout << endl << "Are You Happy With Your Results? (Y/N)" << endl;
-  cin >> prefer;
+  prefer = read_user_input();
   if (prefer == "N" || prefer == "n") {
     cout << endl << "Which action would you prefer for state " << stateString
          << "?" << endl;
@@ -95,7 +94,7 @@ void MSRDMLayer::learn(Network& actionNet, string stateString,
     } else {
       cout << " Enter the number 1 (Comfort), 2 (Play), or 3 (Motivate)"
            << endl;
-      cin >> prefer;
+      prefer = read_user_input();
 
       int done = Data::edit_training_data(caseIn, caseOut, stoi(prefer));
 
@@ -112,6 +111,13 @@ void MSRDMLayer::learn(Network& actionNet, string stateString,
   } else {
     cout << "Yay!" << endl;
   }
+
+}
+
+string MSRDMLayer::read_user_input() {
+  string s;
+  cin >> s;
+  return s;
 
 }
 

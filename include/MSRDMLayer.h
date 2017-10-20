@@ -56,6 +56,12 @@ class MSRDMLayer {
    * @param Inputs are the neural net, the topology of that network, and the training data
    */
   void train(Network& myNet, std::vector<int> topology, Data& trainData);
+
+  /**
+   * @brief A method that allows the robot to read user input
+   * @return Return is the string the user has input
+   */
+  virtual std::string read_user_input();
   /**
    * @brief A method that interprets the raw output of the neural net to determine what the
    * result of the human state is or action of the robot should be

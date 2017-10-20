@@ -86,7 +86,7 @@ void Data::create_training_data(int layerNum, string userDataFolder) {
   if (layerNum == 2) {
     createDataFile.open(userDataFolder + "Layer2/TrainingData.txt");
     if (!createDataFile.is_open())
-      cout << "CANT FIND FILE";
+      cout << "CANT FIND FILE" << endl;
 
     createDataFile << "topology: 4 4 1 8" << endl;
 
@@ -238,7 +238,7 @@ vector<double> Data::get_target_outputs() {
 
 void Data::show_vector_vals(string label, vector<double> v) {
   cout << label << " ";
-  for (unsigned i = 0; i < v.size(); ++i) {
+  for (int i = 0; i < v.size(); ++i) {
     cout << v[i] << " ";
   }
   cout << endl;

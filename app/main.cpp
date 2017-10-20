@@ -42,6 +42,7 @@ int main() {
   string userDataFolder = string(c) + "/Data/";
   string layer1 = userDataFolder + "Layer1";
   string layer2 = userDataFolder + "Layer2";
+  mkdir(userDataFolder.c_str(), 0700);
   mkdir(layer1.c_str(), 0700);
   mkdir(layer2.c_str(), 0700);
 
