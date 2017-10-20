@@ -1,7 +1,7 @@
 # C++ Boilerplate
 [![Build Status](https://travis-ci.org/sjohns09/MSRDM.svg?branch=master)](https://travis-ci.org/sjohns09/MSRDM)
 [![Coverage Status](https://coveralls.io/repos/github/sjohns09/MSRDM/badge.svg?branch=master)](https://coveralls.io/github/sjohns09/MSRDM?branch=master)
----
+
 
 ## Overview
 
