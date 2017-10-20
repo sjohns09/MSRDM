@@ -28,12 +28,17 @@ class MSRDMLayer_test : public ::testing::Test {
   char buff[256];
   char* c = getcwd(buff, sizeof(buff));
   string folderPath = string(c) + "/Data/";
+  string layer1 = folderPath + "Layer1";
+  string layer2 = folderPath + "Layer2";
 
   vector<int> stateTopology = {3,4,1,6};
   vector<int> actionTopology = {4,4,1,8};
 
  protected:
   virtual void SetUp() {
+    mkdir(layer1.c_str(), 0700);
+    mkdir(layer2.c_str(), 0700);
+
     Data::create_training_data(1, folderPath);
     Data::create_training_data(2, folderPath);
   }
@@ -42,7 +47,6 @@ class MSRDMLayer_test : public ::testing::Test {
 
 TEST_F(MSRDMLayer_test, testStateOutputIsCorrectForAnxious) {
 
-  std::cout << folderPath << std::endl;
   MSRDMLayer MSRDMTest(folderPath);
   vector<int> topology = stateTopology;
   Data trainData(folderPath + "Layer1/");

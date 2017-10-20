@@ -52,7 +52,7 @@ void Data::create_training_data(int layerNum, string userDataFolder) {
   if (layerNum == 1) {
     createDataFile.open(userDataFolder + "Layer1/TrainingData.txt");
     if (!createDataFile.is_open())
-      cout << "CANT FIND FILE";
+      cout << "CANT FIND FILE" << endl;
 
     createDataFile << "topology: 3 4 1 6" << endl;
 
