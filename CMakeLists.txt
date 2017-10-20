@@ -11,9 +11,8 @@ if (COVERAGE)
     include(CodeCoverage)
     set(LCOV_REMOVE_EXTRA "'vendor/*'")
     setup_target_for_coverage(code_coverage test/cpp-test coverage)
-    set(COVERAGE_SRCS app/main.cpp app/Data.cpp
-    	app/MSRDMLayer.cpp app/Network.cpp app/Neuron.cpp include/Data.h
-    	include/MSRDMLayer.h include/Network.h include/Neuron.h)
+    set(COVERAGE_SRCS app/Data.cpp
+    	app/MSRDMLayer.cpp app/Network.cpp app/Neuron.cpp)
 
     SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
     SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
