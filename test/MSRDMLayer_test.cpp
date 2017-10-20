@@ -42,6 +42,7 @@ class MSRDMLayer_test : public ::testing::Test {
 
 TEST_F(MSRDMLayer_test, testStateOutputIsCorrectForAnxious) {
 
+  std::cout << folderPath << std::endl;
   MSRDMLayer MSRDMTest(folderPath);
   vector<int> topology = stateTopology;
   Data trainData(folderPath + "Layer1/");
