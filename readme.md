@@ -19,28 +19,27 @@ The module that will be developed is the Mental State Reactionary Decision Maker
 which is a component of the decision making part of the brain for the robot companion. This part of the
 brain will need to be trained to respond to different signals that are coming in from the user and make a
 decision on how to react to best help the user at that time. The robot will detect the state of the patient
-through various sensors, such as a wearable armband for heart rate detection, facial detection to
-determine emotions such as sadness and smiling, motion detection to determine the activity level of the
-individual, and sound detection to determine if the individual is in distress. Each of these sensors will
-provide an input into the MSRDM which will then determine which action the robot needs to take in
-order to address the mental state of the individual and output this for the robot to act upon.
+through various sensors, such as a wearable armband for heart rate detection, motion detection to determine the 
+activity level of the individual, and sound detection to determine if the individual is in distress. 
+Each of these sensors will provide an input into the MSRDM which will then determine which action the robot needs 
+to take in order to address the mental state of the individual and output this for the robot to act upon.
 
 One of the key components of the MSRDM is its ability to take feedback from the user over
 time and re-learn how to react when that user exhibits certain signs. This means that each pet
 companion will be tailored for its own human and will grow to understand how to interact with the
 human better as time passes
 
-To develop the MSRDM a feedforward Artificial Neural Network will be developed which will
-allow the MSRDM to be initially trained on a data set using a supervised backpropagation method. The
-MSRDM will actually consist of two layers of ANNs, where the signals from the sensors feed into the
+To develop the MSRDM a feedforward Artificial Neural Network was developed which allows
+the MSRDM to be initially trained on a data set using a supervised backpropagation method. The
+MSRDM consists of two layers of ANNs, where the signals from the sensors feed into the
 input to the first ANN, then the output from the first ANN feeds into the inputs to the second ANNs, and
-the output from the second ANNs tell the robot what action needs to be taken. The first ANN will
-determine the state of the human based on sensor inputs, and bin this state into categories, such as
-Anxious, sad, lethargic, and critical. The second layer of ANNs will exist to determine the best
+the output from the second ANNs tell the robot what action needs to be taken. The first ANN
+determines the state of the human based on sensor inputs, and bins this state into categories, such as
+anxious, sad, lethargic, and critical. The second layer of ANNs determines the best
 response that the robot should take based on its previous training and the users preferences. Only the
-second layer of ANNs will be user tunable through user interactions.
+second layer of ANNs will be user tunable through user feedback.
 
-Due to the complex nature of Neural Networks a training video was utilized to guide in creating the backbone of the neural net. This video is by David Miller caller "Neural Net in C++ Tutorial" (https://vimeo.com/19569529). All code for this project was developed by the author of this project, even though the video was used to guide development in some areas where the author had less knowledge.
+Due to the complex nature of Neural Networks a training video was utilized to guide in creating the framework of the neural net. This video is by David Miller called "Neural Net in C++ Tutorial" (https://vimeo.com/19569529). All code for this project was developed by the author of this project, even though the video was used to guide development in areas where the author had less knowledge.
 
 ## Results
 Demo Sample With Positive Feedback From Human
@@ -129,10 +128,6 @@ Run tests: ./test/cpp-test
 Run program: ./app/shell-app
 ```
 The demo will begin running when shell-app is started.
-
-## To-Run
-To run the code on a different workstation the file paths in main.cpp (variable = userDataFolder)
-and MSRDM (variable = folderPath) must be updated to match the workstation from which the code is being run. The filepath should be to the Data folder, follow the formatting in the code.
 
 ## Backlog
 
