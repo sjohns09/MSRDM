@@ -62,12 +62,12 @@ class Data {
    * @brief A method that allows vector values to be displayed in the console
    * @param Input is the text and values that will be displayed
    */
-  static void show_vector_vals(std::string label, std::vector<double> v);
+  static void show_vector_vals(std::string label, std::vector<double> vector);
   /**
    * @brief A method that determine if the file has reached the end
    * @result Return is whether the end is reached or not
    */
-  bool isEof(void);
+  bool isEof();
   std::fstream trainingDataFile;
   std::string trainingFile;
   static std::string dataFolder;
