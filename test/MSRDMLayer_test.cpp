@@ -7,8 +7,14 @@
  */
 
 #include <gtest/gtest.h>
-#include <string>
+#include <iostream>
 #include <vector>
+#include <cassert>
+#include <fstream>
+#include <string>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/stat.h>
 #include "MSRDMLayer.h"
 #include "Network.h"
 #include "Data.h"
@@ -16,15 +22,25 @@
 using std::string;
 using std::vector;
 
-string folderPath = "/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/Data/";
-vector<int> stateTopology = {3,4,1,6};
-vector<int> actionTopology = {4,4,1,8};
+class MSRDMLayer_test : public ::testing::Test {
+
+ public:
+  char buff[256];
+  char* c = getcwd(buff, sizeof(buff));
+  string folderPath = string(c) + "/Data/";
+
+  vector<int> stateTopology = {3,4,1,6};
+  vector<int> actionTopology = {4,4,1,8};
+
+ protected:
+  virtual void SetUp() {
+    Data::create_training_data(1, folderPath);
+    Data::create_training_data(2, folderPath);
+  }
+};
 
 
-TEST(MSRDMLayer_test, testStateOutputIsCorrectForAnxious) {
-
-  Data::create_training_data(1, folderPath);
-  Data::create_training_data(2, folderPath);
+TEST_F(MSRDMLayer_test, testStateOutputIsCorrectForAnxious) {
 
   MSRDMLayer MSRDMTest(folderPath);
   vector<int> topology = stateTopology;
@@ -47,7 +63,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForAnxious) {
   EXPECT_EQ("ANXIOUS", trainedResultString);
 }
 
-TEST(MSRDMLayer_test, testStateOutputIsCorrectForSad) {
+TEST_F(MSRDMLayer_test, testStateOutputIsCorrectForSad) {
 
   Data::create_training_data(1, folderPath);
   Data::create_training_data(2, folderPath);
@@ -73,7 +89,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForSad) {
   EXPECT_EQ("SAD", trainedResultString);
 }
 
-TEST(MSRDMLayer_test, testStateOutputIsCorrectForLethargic) {
+TEST_F(MSRDMLayer_test, testStateOutputIsCorrectForLethargic) {
 
   Data::create_training_data(1, folderPath);
   Data::create_training_data(2, folderPath);
@@ -99,7 +115,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForLethargic) {
   EXPECT_EQ("LETHARGIC", trainedResultString);
 }
 
-TEST(MSRDMLayer_test, testStateOutputIsCorrectForCritical) {
+TEST_F(MSRDMLayer_test, testStateOutputIsCorrectForCritical) {
 
   Data::create_training_data(1, folderPath);
   Data::create_training_data(2, folderPath);
@@ -125,7 +141,7 @@ TEST(MSRDMLayer_test, testStateOutputIsCorrectForCritical) {
   EXPECT_EQ("CRITICAL", trainedResultString);
 }
 
-TEST(MSRDMLayer_test, testActionOutputIsComfortForAnxiousInput) {
+TEST_F(MSRDMLayer_test, testActionOutputIsComfortForAnxiousInput) {
 
   Data::create_training_data(1, folderPath);
   Data::create_training_data(2, folderPath);
@@ -151,7 +167,7 @@ TEST(MSRDMLayer_test, testActionOutputIsComfortForAnxiousInput) {
   EXPECT_EQ("COMFORT", trainedResultString);
 }
 
-TEST(MSRDMLayer_test, testActionOutputIsPlayForSadInput) {
+TEST_F(MSRDMLayer_test, testActionOutputIsPlayForSadInput) {
 
   Data::create_training_data(1, folderPath);
   Data::create_training_data(2, folderPath);
@@ -177,7 +193,7 @@ TEST(MSRDMLayer_test, testActionOutputIsPlayForSadInput) {
   EXPECT_EQ("PLAY", trainedResultString);
 }
 
-TEST(MSRDMLayer_test, testActionOutputIsMotivateForLethargicInput) {
+TEST_F(MSRDMLayer_test, testActionOutputIsMotivateForLethargicInput) {
 
   Data::create_training_data(1, folderPath);
   Data::create_training_data(2, folderPath);
@@ -203,7 +219,7 @@ TEST(MSRDMLayer_test, testActionOutputIsMotivateForLethargicInput) {
   EXPECT_EQ("MOTIVATE", trainedResultString);
 }
 
-TEST(MSRDMLayer_test, testActionOutputIsEmergencyForCriticalInput) {
+TEST_F(MSRDMLayer_test, testActionOutputIsEmergencyForCriticalInput) {
 
   Data::create_training_data(1, folderPath);
   Data::create_training_data(2, folderPath);
@@ -230,7 +246,7 @@ TEST(MSRDMLayer_test, testActionOutputIsEmergencyForCriticalInput) {
 }
 
 
-// TEST(MSRDMLayer_test, testLearnForNegativeFeedbackOnMotivate) {
+// TEST_F(MSRDMLayer_test, testLearnForNegativeFeedbackOnMotivate) {
 //
 //  MSRDMLayer MSRDMTest(folderPath);
 //  vector<int> topology = actionTopology;
@@ -258,7 +274,7 @@ TEST(MSRDMLayer_test, testActionOutputIsEmergencyForCriticalInput) {
 //  EXPECT_NE("MOTIVATE", trainedResultString);
 //}
 //
-// TEST(MSRDMLayer_test, testLearnForNegativeFeedbackOnEmergencyDoesNotChange) {
+// TEST_F(MSRDMLayer_test, testLearnForNegativeFeedbackOnEmergencyDoesNotChange) {
 //
 //  MSRDMLayer MSRDMTest(folderPath);
 //  vector<int> topology = actionTopology;
@@ -285,7 +301,7 @@ TEST(MSRDMLayer_test, testActionOutputIsEmergencyForCriticalInput) {
 //  EXPECT_EQ("EMERGENCY", trainedResultString);
 //}
 //
-// TEST(MSRDMLayer_test, testGetMSRDMOutputForSensorInput) {
+// TEST_F(MSRDMLayer_test, testGetMSRDMOutputForSensorInput) {
 //
 //  MSRDMLayer stateMSRDM(folderPath);
 //  MSRDMLayer actionMSRDM(folderPath);

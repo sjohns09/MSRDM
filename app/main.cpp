@@ -17,6 +17,10 @@
 #include <cassert>
 #include <fstream>
 #include <string>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/stat.h>
+//#include <boost/filesystem.hpp>
 #include "Network.h"
 #include "Neuron.h"
 #include "Data.h"
@@ -31,8 +35,15 @@ using std::fstream;
 
 int main() {
 
-  string userDataFolder =
-      "/home/sammie/eclipse-workspace/SoftDev_Robotics/Midterm/MSRDM/Data/";
+  char buff[256];
+  char* c;
+  c = getcwd(buff, sizeof(buff));
+  cout << c << endl;
+  string userDataFolder = string(c) + "/Data/";
+  string layer1 = userDataFolder + "Layer1";
+  string layer2 = userDataFolder + "Layer2";
+  mkdir(layer1.c_str(), 0700);
+  mkdir(layer2.c_str(), 0700);
 
   // ------ Create Data Files --------
   Data::create_training_data(1, userDataFolder);

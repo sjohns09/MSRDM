@@ -47,7 +47,7 @@ Data::Data(string layerFolderPath) {
 void Data::create_training_data(int layerNum, string userDataFolder) {
 
   // Create Test Data File For Layer1
-  fstream createDataFile;
+  ofstream createDataFile;
 
   if (layerNum == 1) {
     createDataFile.open(userDataFolder + "Layer1/TrainingData.txt");
